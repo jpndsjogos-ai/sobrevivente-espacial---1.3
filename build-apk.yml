@@ -1,0 +1,48 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar dependências do projeto
+        run: npm install
+
+      - name: Configurar Java (necessário para o Android)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Adicionar a plataforma Android (Capacitor)
+        run: npx cap add android
+
+      - name: Sincronizar o site do jogo com o projeto Android
+        run: npx cap sync android
+
+      - name: Dar permissão de execução ao gradlew
+        run: chmod +x android/gradlew
+
+      - name: Compilar o APK (debug, instalável direto)
+        run: |
+          cd android
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Publicar o APK gerado
+        uses: actions/upload-artifact@v4
+        with:
+          name: survivor-offline-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk

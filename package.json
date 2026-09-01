@@ -1,0 +1,16 @@
+{
+  "name": "survivor-offline",
+  "version": "1.0.0",
+  "description": "Jogo offline estilo Vampire Survivors, empacotado como APK Android via Capacitor",
+  "private": true,
+  "scripts": {
+    "dev": "npx http-server www -p 8080"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/core": "^6.1.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.2"
+  }
+}

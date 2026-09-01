@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<title>Sobrevivente Espacial</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="game"></canvas>
+
+  <div id="hud">
+    <div id="hpBarWrap"><div id="hpBar"></div></div>
+    <div id="topInfo">
+      <span id="levelInfo">Nv. 1</span>
+      <span id="timeInfo">00:00</span>
+      <span id="killInfo">Kills: 0</span>
+    </div>
+    <div id="bossBarWrap" class="hidden">
+      <div id="bossName">Boss</div>
+      <div id="bossHpTrack"><div id="bossHpFill"></div></div>
+    </div>
+  </div>
+
+  <button id="pauseBtn" class="hidden">⏸</button>
+
+  <div id="bossAlert" class="hidden"></div>
+
+  <div id="joystickZone">
+    <div id="joystickBase">
+      <div id="joystickStick"></div>
+    </div>
+  </div>
+
+  <div id="levelUpScreen" class="hidden">
+    <h2>Escolha um upgrade</h2>
+    <div id="upgradeChoices"></div>
+  </div>
+
+  <div id="startScreen">
+    <h1>SOBREVIVENTE ESPACIAL</h1>
+    <p>Pilote sua nave e sobreviva ao campo de asteroides.</p>
+    <button id="startBtn">Jogar</button>
+    <div class="menuRow">
+      <button id="audioBtn" class="secondaryBtn">🔊 Áudio</button>
+      <button id="rankingBtn" class="secondaryBtn">🏆 Ranking</button>
+    </div>
+  </div>
+
+  <div id="pauseScreen" class="hidden">
+    <h1>Pausado</h1>
+    <button id="resumeBtn">Continuar</button>
+    <div class="menuRow">
+      <button id="pauseAudioBtn" class="secondaryBtn">🔊 Áudio</button>
+      <button id="quitToMenuBtn" class="secondaryBtn">Sair para o menu</button>
+    </div>
+  </div>
+
+  <div id="settingsScreen" class="hidden">
+    <h2>Áudio</h2>
+    <div class="settingsList">
+      <button id="musicToggleBtn" class="toggleBtn">🎵 Música: Ligada</button>
+      <button id="sfxToggleBtn" class="toggleBtn">🔊 Efeitos: Ligados</button>
+    </div>
+    <button id="closeSettingsBtn">Fechar</button>
+  </div>
+
+  <div id="rankingScreen" class="hidden">
+    <h2>Ranking de Kills</h2>
+    <ol id="rankingList"></ol>
+    <button id="closeRankingBtn">Fechar</button>
+  </div>
+
+  <div id="gameOverScreen" class="hidden">
+    <h1>Você morreu</h1>
+    <p id="finalStats"></p>
+    <button id="restartBtn">Jogar novamente</button>
+    <div class="menuRow">
+      <button id="gameOverRankingBtn" class="secondaryBtn">🏆 Ver Ranking</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

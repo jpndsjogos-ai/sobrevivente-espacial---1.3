@@ -1,0 +1,329 @@
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #0d0d12;
+  overflow: hidden;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #eee;
+}
+
+#game {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #14141c;
+  touch-action: none;
+}
+
+#hud {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 10px 14px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+#hpBarWrap {
+  width: 100%;
+  max-width: 400px;
+  height: 16px;
+  background: #3a0d0d;
+  border: 2px solid #661515;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#hpBar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #ff4747, #ff8080);
+  transition: width 0.15s ease-out;
+}
+
+#topInfo {
+  display: flex;
+  gap: 16px;
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 0 1px 3px #000;
+}
+
+#bossBarWrap {
+  margin-top: 10px;
+  max-width: 420px;
+}
+
+#bossName {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #ffd1f0;
+  text-shadow: 0 1px 3px #000;
+  margin-bottom: 3px;
+}
+
+#bossHpTrack {
+  width: 100%;
+  height: 10px;
+  background: rgba(0,0,0,0.4);
+  border: 2px solid rgba(255,255,255,0.25);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+#bossHpFill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #b388ff, #ff6ec7);
+  transition: width 0.15s ease-out;
+}
+
+#bossAlert {
+  position: fixed;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background: rgba(20,10,35,0.85);
+  border: 2px solid #ff6ec7;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  z-index: 7;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+  box-shadow: 0 0 20px rgba(255,110,199,0.5);
+}
+
+#bossAlert.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+#joystickZone {
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 45%;
+  height: 45%;
+  z-index: 6;
+  touch-action: none;
+}
+
+#joystickBase {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(255,255,255,0.25);
+  display: none;
+}
+
+#joystickStick {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.55);
+  top: 32px;
+  left: 32px;
+}
+
+#startScreen, #gameOverScreen, #levelUpScreen, #pauseScreen, #settingsScreen, #rankingScreen {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,15,0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 10;
+  padding: 20px;
+}
+
+#startScreen {
+  background: transparent;
+}
+
+#pauseScreen { z-index: 11; }
+#settingsScreen, #rankingScreen { z-index: 12; }
+
+.hidden { display: none !important; }
+
+#startScreen h1, #gameOverScreen h1 {
+  font-size: 32px;
+  color: #ff5252;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 12px rgba(255,82,82,0.6);
+}
+
+#startScreen p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #eee;
+  margin-bottom: 24px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.9);
+}
+
+#gameOverScreen p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #ccc;
+  margin-bottom: 24px;
+}
+
+button {
+  background: #ff5252;
+  color: #fff;
+  border: none;
+  padding: 14px 34px;
+  font-size: 17px;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(255,82,82,0.4);
+}
+
+button:active { transform: scale(0.96); }
+
+#levelUpScreen h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #ffd166;
+}
+
+#upgradeChoices {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 420px;
+}
+
+.upgradeCard {
+  background: #1e1e2a;
+  border: 2px solid #3a3a4a;
+  border-radius: 12px;
+  padding: 16px;
+  width: 120px;
+  cursor: pointer;
+}
+
+.upgradeCard:active { border-color: #ff5252; }
+
+.upgradeCard .icon { font-size: 30px; margin-bottom: 8px; }
+.upgradeCard .name { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.upgradeCard .desc { font-size: 11px; color: #aaa; }
+
+.shipUpgradeCard {
+  border-color: #ffd166;
+  box-shadow: 0 0 14px rgba(255,209,102,0.35);
+}
+
+#pauseBtn {
+  position: fixed;
+  top: 10px;
+  right: 12px;
+  z-index: 8;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20,20,30,0.6);
+  box-shadow: none;
+  border: 2px solid rgba(255,255,255,0.25);
+}
+
+.menuRow {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.secondaryBtn {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.3);
+  box-shadow: none;
+  font-size: 13px;
+  padding: 10px 18px;
+}
+
+.settingsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+  width: 100%;
+  max-width: 320px;
+}
+
+.toggleBtn {
+  background: #2fa85a;
+  font-size: 14px;
+  width: 100%;
+}
+
+.toggleBtn.off {
+  background: #555;
+}
+
+#rankingList {
+  list-style: none;
+  width: 100%;
+  max-width: 380px;
+  max-height: 50vh;
+  overflow-y: auto;
+  margin: 16px 0;
+  padding: 0;
+}
+
+#rankingList li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1e1e2a;
+  border: 1px solid #333345;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  text-align: left;
+}
+
+#rankingList .rankPos {
+  font-weight: bold;
+  color: #ffd166;
+  min-width: 28px;
+}
+
+#rankingList .rankKills {
+  font-weight: bold;
+  min-width: 64px;
+}
+
+#rankingList .rankMeta {
+  color: #999;
+  font-size: 11px;
+}
+
+#rankingList .emptyRank {
+  color: #999;
+  justify-content: center;
+  text-align: center;
+}
